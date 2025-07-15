@@ -1,0 +1,41 @@
+log:
+  mode: 'development'
+  level: 'debug'
+  path: './logs/app.log'
+http:
+  listen: ':8080'
+rmq:
+  log:
+    root: './logs'
+    fileName: 'rmq.log'
+    level: 'info'
+  callbacks:
+    - name: 'callback_name'
+      url: 'callback_url'
+      timeout: '10s'
+  endpoints:
+    - name: endpoint_name
+      endpoint: 'host:port'
+      namespace: 'namespace'
+      accessKey: 'ak'
+      accessSecret: 'as'
+  producers:
+    - name: 'producer_name'
+      endpointRef: 'endpoint_name'
+      transactionTimeout: '30s'
+  consumers:
+    - name: 'consumer_name'
+      endpointRef: 'endpoint_name'
+      consumeGroup: 'consume_group'
+      consumerType: 'pull'
+      ackMode: 'manual'
+      allowNoCallback: false
+      filter:
+        - topic: 'topic'
+          type: 'tag'
+          expression: '*'
+      callbacks:
+        - ref: callback_name
+          topics:
+            - topic
+          ignoreError: true

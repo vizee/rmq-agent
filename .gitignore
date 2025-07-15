@@ -1,0 +1,9 @@
+.DS_Store
+*.exe
+*.test
+.idea
+.vscode
+
+/rmq-agent
+*.log
+config.yaml
