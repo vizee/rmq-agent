@@ -243,9 +243,9 @@ func newPullConsumer(consumerConfig *RmqConsumerConfig, rmqConfig *RmqConfig) (C
 	}
 	var opts []rmqclient.SimpleConsumerOption
 	if consumerConfig.PullOptions.AwaitDuration > 0 {
-		opts = append(opts, rmqclient.WithAwaitDuration(consumerConfig.PullOptions.AwaitDuration))
+		opts = append(opts, rmqclient.WithSimpleAwaitDuration(consumerConfig.PullOptions.AwaitDuration))
 	}
-	opts = append(opts, rmqclient.WithSubscriptionExpressions(filterExpressions))
+	opts = append(opts, rmqclient.WithSimpleSubscriptionExpressions(filterExpressions))
 	c, err := rmqclient.NewSimpleConsumer(&rmqclient.Config{
 		Endpoint:      endpointConfig.Endpoint,
 		NameSpace:     endpointConfig.Namespace,
